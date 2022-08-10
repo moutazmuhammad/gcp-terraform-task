@@ -12,7 +12,7 @@ resource "google_container_node_pool" "node-pool" {
     machine_type = var.nodes_type
     disk_size_gb = 100
 
-    service_account = google_service_account.container_registory_admin_sa.email
+    service_account = var.gke_cluster_sa_email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]

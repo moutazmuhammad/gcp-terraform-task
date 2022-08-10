@@ -21,3 +21,8 @@ variable "subnet_self_link" {
 variable "project_id" {
   type = string
 }
+
+
+variable "private_vm_sa_email" {
+    type = string
+}

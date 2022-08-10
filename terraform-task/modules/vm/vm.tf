@@ -8,6 +8,8 @@ resource "google_compute_instance" "private-vm" {
   boot_disk {
     initialize_params {
       image = var.vm-image
+      size = 100
+      type = "pd-standard"
     }
   }
 
@@ -19,7 +21,7 @@ resource "google_compute_instance" "private-vm" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.bigquery_and_bucket_user_sa.email # google_service_account.bigquery_admin_sa.email
+    email  = var.private_vm_sa_email # google_service_account.bigquery_admin_sa.email
     scopes = ["cloud-platform"] 
 
   }
@@ -28,13 +30,13 @@ resource "google_compute_instance" "private-vm" {
 
 
 
-# IAP for DevOps to access VM through SSH
+# # IAP for DevOps to access VM through SSH
 
-resource "google_iap_tunnel_instance_iam_member" "instance" {
-  project = var.project_id
-  zone = var.zone
-  instance = google_compute_instance.private-vm.name
-  role = "roles/iap.tunnelResourceAccessor"
-  member   = "user:moutazmuhammad1997@gmail.com"
-  depends_on = [google_compute_instance.private-vm]
-}
+# resource "google_iap_tunnel_instance_iam_member" "instance" {
+#   project = var.project_id
+#   zone = var.zone
+#   instance = var.vm-name #google_compute_instance.private-vm.name
+#   role = var.iap-role #"roles/iap.tunnelResourceAccessor"
+#   member   = var.iap-role-member #"user:moutazmuhammad1997@gmail.com"
+#   # depends_on = [google_compute_instance.private-vm]
+# }

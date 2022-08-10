@@ -7,30 +7,35 @@ module "network" {
   vpc_id      = module.network.vpc_id
   subnet-name = var.subnet-name
   subnet-cidr = var.subnet-cidr
+  iap-vm-name = module.vm.vm-name
+  iap-role    = var.iap-role
+  iap-role-member = var.iap-role-member
 }
 
 module "vm" {
-  source           = "./modules/vm"
-  project_id       = var.project-id
-  vm-name          = var.vm-name
-  vm-type          = var.vm-type
-  zone             = var.zone
-  vm-image         = var.vm-image
-  subnet_self_link = module.network.subnet_self_link
+  source              = "./modules/vm"
+  project_id          = var.project-id
+  vm-name             = var.vm-name
+  vm-type             = var.vm-type
+  zone                = var.zone
+  vm-image            = var.vm-image
+  subnet_self_link    = module.network.subnet_self_link
+  private_vm_sa_email = module.serviceAccount.private-vm-sa-email
 }
 
 module "cluster" {
-  source            = "./modules/cluster"
-  cluster_name      = var.cluster_name
-  region            = var.region
-  zone-one          = var.zone-one
-  zone-two          = var.zone-two
-  network_self_link = module.network.network_self_link
-  subnet_self_link  = module.network.subnet_self_link
-  project_id        = var.project-id
-  node_pool_name    = var.node_pool_name
-  nodes_count       = var.nodes_count
-  nodes_type        = var.nodes_type
+  source               = "./modules/cluster"
+  cluster_name         = var.cluster_name
+  region               = var.region
+  zone-one             = var.zone-one
+  zone-two             = var.zone-two
+  network_self_link    = module.network.network_self_link
+  subnet_self_link     = module.network.subnet_self_link
+  project_id           = var.project-id
+  node_pool_name       = var.node_pool_name
+  nodes_count          = var.nodes_count
+  nodes_type           = var.nodes_type
+  gke_cluster_sa_email = module.serviceAccount.gke-cluster-sa-email
 }
 
 module "bucket" {
@@ -49,3 +54,11 @@ module "bigquery" {
   database_count = var.database_count
   location       = var.location
 }
+
+module "serviceAccount" {
+  source        = "./modules/serviceAccount"
+  project_id    = var.project-id
+  vm-roles      = var.vm-roles
+  cluster-roles = var.cluster-roles
+}
+  

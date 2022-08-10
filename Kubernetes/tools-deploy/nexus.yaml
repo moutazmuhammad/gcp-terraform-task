@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexus
+  namespace: tools
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nexus
+  template:
+    metadata:
+      labels:
+        app: nexus
+    spec:
+      containers:
+      - name: nexus
+        image: gcr.io/iti-2-358616/nexus
+        ports:
+          - name: http-port
+            containerPort: 8081
+        volumeMounts:
+            - name: nexus-data
+              mountPath: /home/nexus_home         
+      volumes:
+        - name: nexus-data
+          persistentVolumeClaim:
+              claimName: nexus-pv-claim

@@ -31,9 +31,12 @@ variable "node_pool_name" {
 }
 
 variable "nodes_count" {
-    default = 3
 }
 
 variable "nodes_type" {
+    type = string
+}
+
+variable "gke_cluster_sa_email" {
     type = string
 }

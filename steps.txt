@@ -1,0 +1,42 @@
+1- ssh to private vm
+		- sudo apt update
+		- sudo apt upgrade
+
+	* install plugin
+		- sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+		- sudo apt-get install kubectl
+	
+	* install docker
+		- curl -fsSL https://test.docker.com -o test-docker.sh 
+		- sudo sh test-docker.sh
+		- sudo usermod -aG docker ${USER}
+		- gcloud auth configure-docker
+		- sudo reboot
+	
+	* connect to cluster
+		- gcloud container clusters get-credentials YOUR_CLUSTER_NAME
+
+2- From local machine
+	* build images you want
+		- docker build -t <image_name> .
+
+	* push it to GCR
+	
+		- docker tag <image_name> gcr.io/<project_id>/<image_name>
+		- docker push gcr.io/<project_id>/<image_name>
+
+3- pull image from GCR to VM
+	- docker pull gcr.io/<project_name>/<image_name>
+	
+4- deploy
+	* Create a Namespace for the Jenkins and nexus
+		- kubectl create namespace tools
+	* run this command  in kubernetes -> tools folder to deploy yaml files 
+		- kubectl apply -f *
+		
+		
+		
+		
+		
+		
+		

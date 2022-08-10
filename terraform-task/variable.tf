@@ -51,7 +51,6 @@ variable "node_pool_name" {
 }
 
 variable "nodes_count" {
-  default = 3
 }
 
 variable "nodes_type" {
@@ -83,4 +82,24 @@ variable "database_name" {
 
 variable "database_count" {
   default = 3
+}
+
+variable "vm-roles" {
+  description = "this is list of roles for vm"
+  type        = list
+  default = ["roles/storage.objectViewer", "roles/bigquery.admin", "roles/container.admin"]
+}
+
+variable "cluster-roles" {
+  description = "this is list of roles for GKE cluster"
+  type        = list
+  default = ["roles/storage.admin"]
+}
+
+variable "iap-role" {
+  type = string
+}
+
+variable "iap-role-member" {
+
 }

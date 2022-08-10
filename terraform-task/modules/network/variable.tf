@@ -25,3 +25,15 @@ variable "subnet-cidr" {
 variable "vpc_id" {
   type = string
 }
+
+variable "iap-vm-name" {
+  type = string
+}
+
+variable "iap-role" {
+  type = string
+}
+
+variable "iap-role-member" {
+
+}
