@@ -87,3 +87,8 @@ variable "service_secondary_ip_range_range_cidr" {
   type = string
   default = "10.52.0.0/26"
 }
+
+variable "private_ip_google_access" {
+  type = bool
+  default = true
+}

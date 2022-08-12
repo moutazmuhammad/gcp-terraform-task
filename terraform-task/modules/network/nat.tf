@@ -1,3 +1,7 @@
+# Note: 
+# In this task, you need the NAT so that I can download Kubectl and Plugin to gcloud
+# then you can remove the NAT
+
 resource "google_compute_router_nat" "nat" {
   name   = var.nat_name 
   router = google_compute_router.router.name

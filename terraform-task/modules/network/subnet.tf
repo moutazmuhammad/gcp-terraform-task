@@ -14,4 +14,6 @@ resource "google_compute_subnetwork" "private-subnet" {
     ip_cidr_range = "10.52.0.0/26"
   }
 
+  private_ip_google_access = var.private_ip_google_access
+
 }
