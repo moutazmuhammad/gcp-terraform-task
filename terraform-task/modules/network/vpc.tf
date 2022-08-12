@@ -17,9 +17,9 @@ resource "google_project_service" "container" {
 resource "google_compute_network" "vpc_network" {
   project                         = var.project-id
   name                            = var.vpc-name
-  auto_create_subnetworks         = false # TO create custom subnets -> this option must be false
-  mtu                             = 1460
-  delete_default_routes_on_create = false
+  auto_create_subnetworks         = var.auto_create_subnetworks #false # TO create custom subnets -> this option must be false
+  mtu                             = var.vpc_mtu 
+  delete_default_routes_on_create = var.delete_default_routes_on_create
 
   depends_on = [ # That is mean : before create VPC : create this req.. 
     google_project_service.compute,

@@ -28,3 +28,8 @@ variable "bucket_role" {
 variable "SA" {
   type = string
 }
+
+variable "force_destroy" {
+  type = bool
+  default = true
+}

@@ -8,9 +8,9 @@ resource "google_container_node_pool" "node-pool" {
   ]
 
   node_config {
-    preemptible  = false
+    preemptible  = var.node_config_preemptible #false
     machine_type = var.nodes_type
-    disk_size_gb = 100
+    disk_size_gb = var.node_disk_size_gb #100
 
     service_account = var.gke_cluster_sa_email
     oauth_scopes = [

@@ -61,8 +61,8 @@ module "bigquery" {
 }
 
 module "serviceAccount" {
-  source        = "./modules/serviceAccount"
-  project_id    = var.project-id
+  source     = "./modules/serviceAccount"
+  project_id = var.project-id
   # vm-roles      = var.vm-roles
   cluster-roles = var.cluster-roles
 }

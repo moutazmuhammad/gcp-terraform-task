@@ -1,8 +1,8 @@
 resource "google_container_cluster" "primary" {
   name                     = var.cluster_name
   location                 = var.region
-  remove_default_node_pool = true
-  initial_node_count       = 1
+  remove_default_node_pool = var.remove_default_node_pool #true
+  initial_node_count       = var.initial_node_count #1
   network                  = var.network_self_link
   subnetwork               = var.subnet_self_link
 #   networking_mode          = "VPC_NATIVE"
@@ -14,7 +14,7 @@ resource "google_container_cluster" "primary" {
   ]
 
   release_channel {  #  upgrades for the Kubernetes control  plane
-    channel = "REGULAR"
+    channel = var.release_channel #"REGULAR"
   }
 
   # To Make Sure service account inside cluster  Workload Identity 
@@ -29,9 +29,9 @@ resource "google_container_cluster" "primary" {
   }
 
   private_cluster_config {
-    enable_private_nodes    = true
-    enable_private_endpoint = false
-    master_ipv4_cidr_block  = "172.16.0.0/28"
+    enable_private_nodes    = var.enable_private_nodes #true
+    enable_private_endpoint = var.enable_private_endpoint #false
+    master_ipv4_cidr_block  = var.master_ipv4_cidr_block #"172.16.0.0/28"
   }
 
 }

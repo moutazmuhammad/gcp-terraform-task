@@ -13,12 +13,11 @@ resource "google_service_account" "private_vm_sa" {
 #     depends_on = [google_service_account.private_vm_sa]
 # }
 
-resource "google_project_iam_binding" "private_vm_roles"{
+resource "google_project_iam_member" "private_vm_roles"{
     project = var.project_id
     role = "roles/container.admin"
-    members=[
-      "serviceAccount:${google_service_account.private_vm_sa.email}"
-      ]
+    member = "serviceAccount:${google_service_account.private_vm_sa.email}"
+      
     depends_on = [google_service_account.private_vm_sa]
 }
 
@@ -28,12 +27,10 @@ resource "google_service_account" "gke_cluster_sa" {
   display_name = "gke-cluster-sa"
 }
 
-resource "google_project_iam_binding" "cluster_roles"{
+resource "google_project_iam_member" "cluster_roles"{
     project = var.project_id
     count = length(var.cluster-roles)
     role = "${var.cluster-roles[count.index]}"
-    members=[
-      "serviceAccount:${google_service_account.gke_cluster_sa.email}"
-      ]
+    member  = "serviceAccount:${google_service_account.gke_cluster_sa.email}"
     depends_on = [google_service_account.gke_cluster_sa]
 }

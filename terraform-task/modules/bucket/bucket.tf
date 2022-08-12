@@ -2,7 +2,7 @@ resource "google_storage_bucket" "my_bucket" {
   name          = "${var.project_id}-${count.index}"
   project       = var.project_id
   location      = var.location
-  force_destroy = true
+  force_destroy = var.force_destroy #true
   count         = var.bucket_count 
   storage_class = var.bucket_storage_class
 

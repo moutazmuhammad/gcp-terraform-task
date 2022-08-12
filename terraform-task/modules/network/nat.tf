@@ -1,5 +1,5 @@
 resource "google_compute_router_nat" "nat" {
-  name   = "my-nat"
+  name   = var.nat_name 
   router = google_compute_router.router.name
   region = var.region
 

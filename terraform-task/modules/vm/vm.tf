@@ -8,8 +8,8 @@ resource "google_compute_instance" "private-vm" {
   boot_disk {
     initialize_params {
       image = var.vm-image
-      size = 100
-      type = "pd-standard"
+      size = var.vm_boot_disk_size 
+      type = var.vm_boot_disk_type 
     }
   }
 

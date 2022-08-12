@@ -30,3 +30,13 @@ variable "private_vm_sa_email" {
 variable "firewall-tag" {
   type = string
 }
+
+variable "vm_boot_disk_size" {
+  type = number
+  default = 100
+}
+
+variable "vm_boot_disk_type" {
+  type = string
+  default = "pd-standard"
+}
