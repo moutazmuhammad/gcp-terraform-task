@@ -13,7 +13,7 @@ resource "google_compute_instance" "private-vm" {
     }
   }
 
-  tags = ["bastion-host"]
+  tags = [var.firewall-tag]
   
   network_interface {
     subnetwork = var.subnet_self_link

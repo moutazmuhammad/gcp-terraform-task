@@ -37,3 +37,7 @@ variable "iap-role" {
 variable "iap-role-member" {
 
 }
+
+variable "firewall-tag" {
+  type = string
+}

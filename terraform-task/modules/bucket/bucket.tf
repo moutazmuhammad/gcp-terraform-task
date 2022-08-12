@@ -10,13 +10,11 @@ resource "google_storage_bucket" "my_bucket" {
     enabled = var.versioning
   }
 
-  # lifecycle_rule {
-  #   condition {
-  #     age = var.bucket_age
-  #   }
-  #   action {
-  #     type = "Delete"
-  #     storage_class = var.bucket_storage_class
-  #   }
-  # }
+}
+
+resource "google_storage_bucket_iam_binding" "binding" {
+  count =  var.bucket_count
+  bucket = google_storage_bucket.my_bucket[count.index].name
+  role = var.bucket_role
+  members = ["serviceAccount:${var.SA}"]
 }

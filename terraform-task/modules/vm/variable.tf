@@ -26,3 +26,7 @@ variable "project_id" {
 variable "private_vm_sa_email" {
     type = string
 }
+
+variable "firewall-tag" {
+  type = string
+}

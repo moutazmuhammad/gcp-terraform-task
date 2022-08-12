@@ -9,3 +9,7 @@ variable "database_count" {
 variable "location" {
   type = string
 }
+
+variable "SA" {
+  type = string
+}

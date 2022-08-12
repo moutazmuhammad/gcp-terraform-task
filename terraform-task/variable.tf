@@ -86,14 +86,14 @@ variable "database_count" {
 
 variable "vm-roles" {
   description = "this is list of roles for vm"
-  type        = list
-  default = ["roles/storage.objectViewer", "roles/bigquery.admin", "roles/container.admin"]
+  type        = list(any)
+  default     = ["roles/storage.objectViewer", "roles/bigquery.admin", "roles/container.admin"]
 }
 
 variable "cluster-roles" {
   description = "this is list of roles for GKE cluster"
-  type        = list
-  default = ["roles/storage.admin"]
+  type        = list(any)
+  default     = ["roles/storage.admin"]
 }
 
 variable "iap-role" {
@@ -102,4 +102,12 @@ variable "iap-role" {
 
 variable "iap-role-member" {
 
+}
+
+variable "firewall-tag" {
+  type = string
+}
+
+variable "bucket_role" {
+  type = string
 }

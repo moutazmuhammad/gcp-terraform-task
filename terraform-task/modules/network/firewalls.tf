@@ -10,7 +10,7 @@ resource "google_compute_firewall" "allow-ssh" {
     protocol = "tcp"
   }
 
-  target_tags = [ "bastion-host" ]
+  target_tags = [ var.firewall-tag ] #"bastion-host"
 }
 
 # IAP for DevOps to access VM through SSH

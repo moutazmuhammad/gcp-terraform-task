@@ -20,3 +20,11 @@ variable "bucket_age" {
 
 variable "versioning" {
 }
+
+variable "bucket_role" {
+  type = string
+}
+
+variable "SA" {
+  type = string
+}
